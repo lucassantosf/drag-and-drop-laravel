@@ -21,6 +21,7 @@ Route::group(['prefix'=>'/dashboard','middleware'=>'auth'], function() {
     })->name('dashboard');
 
 	Route::resource('gallery', FilesController::class);
+	Route::post('gallery/update', [FilesController::class,'update'])->name('gallery.update');
 });
 
 require __DIR__.'/auth.php';

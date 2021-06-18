@@ -32122,6 +32122,66 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.bg-info{
+  background-color: rgb(80, 194, 247) !important;
+  color: #fff;
+}
+
+.image{
+  height: 300px;
+  width: 100%;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.image:hover .image-form {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image .image-form{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.4s, opacity 0.4s linear;
+  font-size: 12px;
+  width: 25px;
+  border: 1px solid #a7a3a3;
+  color: #a7a3a3;
+  border-radius: 15px;
+  text-align: center;
+  padding: 3px;
+  margin-left: auto;
+}
+
+.image .image-input{
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: -30px;
+  margin-left: auto;
+  border: 1px solid #a7a3a3;
+  border-radius: 9px;
+  max-width: 100%;
+  height: 26px;
+  color: #a7a3a3;
+}
+
+.border-none{
+  border: 0 !important;
+}
+
+button, button:hover, button:active, button:visited, button:focus {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -188235,5 +188295,4 @@ select {
   .\32xl\:ease-in-out {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
-}
-
+} 

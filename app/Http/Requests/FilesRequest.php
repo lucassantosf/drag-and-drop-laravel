@@ -24,7 +24,7 @@ class FilesRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'=>'required|max:1000'
+            'file'=>'required|max:1000|mimes:png,jpg'
         ];
     }
 
@@ -32,6 +32,7 @@ class FilesRequest extends FormRequest
         return [
             'file.required'=>'O arquivo é obrigatório',
             'file.max'=>'O peso da imagem deve ser no máximo 1 mb',
+            'file.mimes'=>'Formatos aceitos para a imagem: png,jpg',
         ];
     }
 

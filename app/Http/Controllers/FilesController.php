@@ -44,6 +44,23 @@ class FilesController extends Controller
         return response()->json($file); 
     } 
 
+    public function update(Request $request)
+    {
+        try {
+            $data = $request->all(); 
+            $file = File::findorFail($request->id);
+            $file->update([
+                'label' => $request->label
+            ]);  
+        } catch (\Throwable $th) {
+            Session::flash('message', 'Não foi possível salvar o arquivo! Motivo : '.$th->getMessage()); 
+            Session::flash('color', 'red');
+            return redirect()->route('gallery.index');
+        }
+
+        return response()->json($file); 
+    } 
+
     public function destroy($id)
     { 
         try {
@@ -62,6 +79,5 @@ class FilesController extends Controller
         Session::flash('message', 'Arquivo excluido com sucesso!'); 
         Session::flash('color', 'red');
         return redirect()->route('gallery.index'); 
-    }
-
+    } 
 }

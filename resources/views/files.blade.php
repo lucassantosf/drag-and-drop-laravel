@@ -11,7 +11,7 @@
                  
                 @include('components.alert_messages') 
 
-                <div class="p-6 bg-white border-b border-gray-200">
+                <div class="p-6 bg-white">
                     <form action="{{route('gallery.store')}}" class="dropzone" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
@@ -22,19 +22,23 @@
                     </form> 
                 </div>
 
-                <a href="{{route('gallery.index')}}" class="btn btn-info"><i class="fas fa-sync-alt"></i> Atualizar imagens</a>
+                <div class="bg-white flex justify-center">
+                    <a href="{{route('gallery.index')}}" class="bg-info border border-transparent rounded-md inline-flex items-center px-4 py-1">Atualizar imagens</a>
+                </div>
 
-                <div class="p-6 bg-white border-b border-gray-200 grid grid-cols-8 gap-4">
+                <div class="p-6 bg-white grid grid-cols-3 gap-4"> 
 
                     @if(count($files)>0)
                         @foreach($files as $file)
-                        <div>
-                            <img src="{{$file->file_url}}" alt="{{$file->id}}" width="100%"/>
-                            <form action="{{route('gallery.destroy',$file->id)}}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="DELETE"/>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Remover</button>
-                            </form>
+                        <div class="p-2 mt-4 image" style="background: url('{{$file->file_url}}')">
+                            <div class="image-form"> 
+                                <form action="{{route('gallery.destroy',$file->id)}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button type="submit" class="btn btn-danger">X</button>
+                                </form>
+                            </div> 
+                            <input type="text" class="image-input {{!empty($file->label) ? 'border-none' : '' }}" data-file="{{$file->id}}" @if(!empty($file->label)) value="{{$file->label}}" @else placeholder="Nome da imagem" @endif >
                         </div>
                         @endforeach
                     @endif
@@ -47,18 +51,49 @@
 
     <link href="{{  URL::asset('js/dropzone/dist/dropzone.css')}}" rel="stylesheet" type="text/css">
     <script src="{{ URL::asset('js/dropzone/dist/dropzone.js')}}"></script> 
+
     <script>
         Dropzone.autoDiscover = false;
 
         var dropzone = new Dropzone('.dropzone', {
             previewsContainer: '.dropzone',
-            dictDefaultMessage: 'Selecione as imagens para upload',
+            dictDefaultMessage: 'Arraste e solte imagens para upload',
             dictFallbackText: 'Houve um erro ao subir a imagem, tente novamente.',
             error: function(file, response, errors) {
                 $(file.previewElement).find('.dz-error-message').text(response.errors.file).show().css('opacity', '1');
                 $(file.previewElement).find('.dz-error-mark').show().css('opacity', '1');
             }
         });
+
+        $(".image-input").on('blur',function(){
+            var token =  $('input[name="_token"]').attr('value')
+            var id = $(this).attr("data-file") 
+            var label = this.value
+
+            if(label.length === 0) {
+                $(this).attr("placeholder", "Nome da Imagem")
+                $(this).removeClass("border-none");
+            }else{
+                $(this).addClass("border-none"); 
+            }
+
+            $.ajax('{{route("gallery.update")}}', {
+                type: "POST", 
+                headers:{
+                    'X-CSRF-Token': token 
+                },
+                data:{
+                    id,
+                    label
+                },
+                success: response => {  
+                    console.log('response',response) 
+                },
+                error: (response,status) => {  
+                    console.log('response',error)  
+                }
+            });  
+        }); 
     </script>
 
 </x-app-layout>

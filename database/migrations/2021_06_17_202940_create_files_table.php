@@ -20,7 +20,8 @@ class CreateFilesTable extends Migration
             $table->collation = 'utf8_general_ci';   
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-            $table->string('file')->nullable(); 
+            $table->string('file'); 
+            $table->string('label')->nullable(); 
             $table->timestamps();
         });
     }

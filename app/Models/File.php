@@ -12,7 +12,7 @@ class File extends Model
     protected $table = 'files';
 
     /* Array de campos protegidos a serem gravados no banco */
-    protected $fillable = ['file', 'user_id'];
+    protected $fillable = ['file', 'label', 'user_id'];
 
     /* Array de campos para auxiliar na exibição da url da imagem na view */
     protected $appends = ['file_url'];
