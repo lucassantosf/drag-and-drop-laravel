@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix'=>'/dashboard','middleware'=>'auth'], function() {
+
+    Route::get('/', function () {
+        return redirect()->route('gallery.index');
+    })->name('dashboard');
+
+	Route::resource('gallery', FilesController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
+
+Route::get('/{any?}', function () {
+    return redirect('/login');
+});
