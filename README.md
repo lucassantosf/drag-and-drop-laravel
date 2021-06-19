@@ -37,10 +37,10 @@ Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no n
     <li>Configure as seguintes variáveis do arquivo .env de acordo à seu ambiente, em algum editor de texto: </li>
 </ul>
 
-    APP_URL=http://localhost/fut-agenda/public/ (Url completa do projeto em seu ambiente)
+    APP_URL=http://localhost/drag-and-drop-laravel/public/ (Url completa do projeto em seu ambiente)
     DB_HOST=127.0.0.1 (com o host banco de dados)
     DB_PORT=3306 (com a porta do host do banco de dados)
-    DB_DATABASE=desafio (com o nome do banco de dados)
+    DB_DATABASE=draganddrop (com o nome do banco de dados)
     DB_USERNAME=root (com o nome do usuário com acesso ao banco de dados) 
     DB_PASSWORD= (com a senha do usuário com acesso ao banco de dados) 
  <ul>
@@ -89,4 +89,4 @@ Onde é possível incluir novas imagens, exclui-las, e editar a legenda de cada 
 
 Ao selecionar alguma imagem e ela não atenda aos requisitos de upload ( seja por tamanho, ou formato ), o retorno da mensagem é mostrado no input do dropzone:
 
-<img src="/public/assets/validacao.PNG">  
+<img src="/public/img/validacao.PNG">  
