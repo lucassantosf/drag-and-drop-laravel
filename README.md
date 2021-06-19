@@ -1,62 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Drag-and-drop-laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este repositório contém os arquivos de uma aplicação que faz o upload de múltiplos arquivos com drop-and-drag (arrastar e soltar).
 
-## About Laravel
+Neste projeto utilizei o [Laravel Framework](https://laravel.com/) na versão 8 para o backend, e a biblioteca [dropzone.js](https://www.dropzonejs.com/) para o input de imagens no frontend. No deploy da aplicação utilizei o Heroku. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Caso não deseje fazer a instalação do projeto em seu ambiente, veja ela em execução abaixo:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[Clique aqui para ver](http://drop-files-laravel.herokuapp.com/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Seguem abaixo os requisitos e procedimentos para instalação do projeto em ambiente de desenvolvimento, e algumas observações gerais:
 
-## Learning Laravel
+## Requisitos de Ambiente
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+PHP >= 7.3 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+MySql >= 5.7
 
-## Laravel Sponsors
+Node >= 14.0
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no navegador)
+    
+[WampServer](https://www.wampserver.com/en/) (Recomendado pois este faz a instalação do servidor Apache PHP, Mysql, Phpmyadmin)
 
-### Premium Partners
+[Composer](https://getcomposer.org/) 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+## Como instalar o projeto 
 
-## Contributing
+<ul>
+    <li>Clone este repositório, e coloque a pasta do projeto na pasta pública do servidor PHP local. "C:\wamp64\www\*" caso utilizar o WampServer ou "C:\xampp\htdocs\*" caso utilizar o Xamp Server.</li>
+    <li>Crie um banco de dados Mysql para o projeto</li>
+    <li>Acesse a pasta do projeto através de algum terminal de comandos, e crie um arquivo .env para configurar as variáveis de ambiente, pelo comando: </li>
+</ul>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    cp .env.example .env     
+<ul>
+    <li>Configure as seguintes variáveis do arquivo .env de acordo à seu ambiente, em algum editor de texto: </li>
+</ul>
 
-## Code of Conduct
+    APP_URL=http://localhost/fut-agenda/public/ (Url completa do projeto em seu ambiente)
+    DB_HOST=127.0.0.1 (com o host banco de dados)
+    DB_PORT=3306 (com a porta do host do banco de dados)
+    DB_DATABASE=desafio (com o nome do banco de dados)
+    DB_USERNAME=root (com o nome do usuário com acesso ao banco de dados) 
+    DB_PASSWORD= (com a senha do usuário com acesso ao banco de dados) 
+ <ul>
+    <li>Instale as  dependências do LARAVEL pelo comando: </li>
+ </ul> 
+ 
+    composer install    
+    
+<ul>
+    <li>Gere a chave da aplicação pelo comando: </li>
+</ul>
+    
+    php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<ul>  
+    <li>Gere as tabelas do banco de dados executando o comando: </li>
+</ul>    
+    
+    php artisan migrate
 
-## Security Vulnerabilities
+<ul>  
+    <li>Instale as dependências NPM pelo comando: </li>
+</ul>    
+    
+    npm i --silent
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<ul>  
+    <li>Faça a compilação dos assets do projeto, pelo comando: </li>
+</ul>    
+    
+    npm run watch
 
-## License
+## Observações e Orientações
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Antes de tudo, para o usuário começar a usar o sistema, ele precisa cadastrar-se e fazer o login.
+
+<img src="/public/img/register_login.PNG"> 
+
+Ao entrar no sistema, será exibido o menu principal com a tela para fazer os uploads dos arquivos.
+ 
+<img src="/public/img/upload.PNG"> 
+
+Onde é possível incluir novas imagens, exclui-las, e editar a legenda de cada uma.
+
+## Validações esperadas 
+
+Ao selecionar alguma imagem e ela não atenda aos requisitos de upload ( seja por tamanho, ou formato ), o retorno da mensagem é mostrado no input do dropzone:
+
+<img src="/public/assets/validacao.PNG">  
