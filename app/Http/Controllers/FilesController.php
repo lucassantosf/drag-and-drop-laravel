@@ -14,7 +14,7 @@ class FilesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user(); 
-        $files = $user->files()->get();
+        $files = $user->files()->orderby('files.created_at')->get();
         return view('files',compact('files')); 
     } 
 
